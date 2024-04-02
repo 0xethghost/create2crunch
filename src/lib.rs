@@ -69,11 +69,11 @@ impl Config {
         };
         let leading_zeroes_threshold_string = match args.next() {
             Some(arg) => arg,
-            None => String::from("3"),
+            None => String::from("4"),
         };
         let total_zeroes_threshold_string = match args.next() {
             Some(arg) => arg,
-            None => String::from("5"),
+            None => String::from("7"),
         };
 
         // convert main arguments from hex string to vector of bytes
@@ -196,13 +196,17 @@ pub fn cpu(config: Config) -> Result<(), Box<dyn Error>> {
                     }
                 }
 
-                // only proceed if there are at least three zero bytes
-                if total < 3 {
+                // only proceed if there are at least config.total_zeroes_threshold zero bytes
+                if total < config.total_zeroes_threshold {
+                    return;
+                }
+                // only proceed if it begins at least config.leading_zeroes_threshold zero bytes
+                if leading < config.leading_zeroes_threshold.into() {
                     return;
                 }
 
                 // look up the reward amount
-                let key = leading * 20 + total;
+                let key = leading * 20 + total as usize;
                 let reward_amount = rewards.get(&key);
 
                 // only proceed if an efficient address has been found
