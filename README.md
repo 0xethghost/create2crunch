@@ -8,7 +8,7 @@ Provide three arguments: a factory address (or contract that will call CREATE2),
 Live `Create2Factory` contracts can be found [here](https://blockscan.com/address/0x0000000000ffe8b47b3e2130213b802212439497).
 
 ```sh
-$ git clone https://github.com/0age/create2crunch
+$ git clone https://github.com/0xethghost/create2crunch
 $ cd create2crunch
 $ export FACTORY="0x0000000000ffe8b47b3e2130213b802212439497"
 $ export CALLER="<YOUR_DEPLOYER_ADDRESS_OF_CHOICE_GOES_HERE>"
